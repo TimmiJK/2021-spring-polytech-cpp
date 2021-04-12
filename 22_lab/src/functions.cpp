@@ -1,9 +1,12 @@
 #include "functions.h"
 
-int searchArray(int array[], int size, int value) {
-    for (int i = 0; i < size; ++i) {
-        if (array[i] == value)
-            return i;
+int search_element_in_array(int array[], int size, int element) {
+    int value, number;
+    for (int i = 0; i < size; i++) {
+        if (array[i] == element) {
+            value = array[i];
+            number = i;
+        }
     }
-    return -1;
+    return number;
 }
