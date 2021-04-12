@@ -1,52 +1,37 @@
 #include "binary_search.h"
 
-int find(int *array, int size, int key, bool parameter) {
-    if (parameter == false) {
-        return binary_search(array, size, key);
+int find(int array[], int size, int key, bool mode) {
+    if (mode)
+        return recursivelySearch(array, size, key, 0, size - 1);
+    else
+        return continuouslySearch(array, size, key);
+}
+
+int recursivelySearch(const int array[], int size, int key, int left, int right) {
+    if (left > right) return -1;
+    int mid = (left + right) / 2;
+    if (array[mid] != key) {
+        if (key > array[mid])
+            return recursivelySearch(array, size, key, mid + 1, right);
+        else
+            return recursivelySearch(array, size, key, left, mid - 1);
     } else {
-        return recursive_binary_search(array, size, key, 0, size - 1);
+        return mid;
     }
 }
 
-int recursive_binary_search(int *array, int size, int key, int left_border, int right_border) {
-    int middle;
-    if (size != 0) {
-        middle = (left_border + right_border) / 2;
-        if (array[middle] == key) {
-            return middle;
-        }
-        if (key < array[middle]) {
-            right_border = middle - 1;
-            recursive_binary_search(array, size, key, left_border, right_border);
-        } else {
-            left_border = middle + 1;
-            recursive_binary_search(array, size, key, left_border, right_border);
-        }
-    } else {
-        return -1;
-    }
-}
-
-int binary_search(int *array, int size, int key) {
-    int left_border = 0;
-    int right_border = size - 1;
-    int middle;
-    if (size != 0) {
-        bool pause = true;
-        while (pause) {
-            middle = (right_border + left_border) / 2;
-            if (array[middle] == key) {
-                return middle;
-                pause = false;
-            } else if (left_border != right_border) {
-                if (key < array[middle]) {
-                    right_border = middle - 1;
-                } else {
-                    left_border = middle + 1;
-                }
-            }
-        }
-    } else {
-        return -1;
+int continuouslySearch(const int array[], int size, int key) {
+    int left = 0;
+    int right = size - 1;
+    int mid = 0;
+    while (true) {
+        if (left > right) return -1;
+        mid = (left + right) / 2;
+        if (key < array[mid])
+            right = mid - 1;
+        else if (key > array[mid])
+            left = mid + 1;
+        else
+            return mid;
     }
 }

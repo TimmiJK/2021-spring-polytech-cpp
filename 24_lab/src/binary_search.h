@@ -1,10 +1,10 @@
-#ifndef FUNCTION_H
-#define FUNCTION_H
+#ifndef INC_24_LAB_BINARY_SEARCH_H
+#define INC_24_LAB_BINARY_SEARCH_H
 
-int find(int array[], int size, int key, bool parameter = false);
+int find(int array[], int size, int key, bool mode = false);
 
-int recursive_binary_search(int *array, int size, int key, int left_border, int right_border);
+int recursivelySearch(const int array[], int size, int key, int left, int right);
 
-int binary_search(int *array, int size, int key);
+int continuouslySearch(const int array[], int size, int key);
 
-#endif //INC_24_LAB_FUNCTION_H
+#endif //INC_24_LAB_BINARY_SEARCH_H
